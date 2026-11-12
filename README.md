@@ -7,6 +7,7 @@
 **Keep secrets, infrastructure and personal data on the machine — even when you use an AI coding assistant.**
 
   <a href="https://github.com/LucianCeusanRo/safevibe/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/LucianCeusanRo/safevibe/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://safevibe-demo.vercel.app"><img alt="Live demo" src="https://img.shields.io/badge/live%20demo-safevibe--demo.vercel.app-4caf7a"></a>
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-green.svg"></a>
   <img alt="Python 3.11+" src="https://img.shields.io/badge/language-Python%203.11%2B-blue">
   <a href="https://github.com/LucianCeusanRo/safevibe/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/LucianCeusanRo/safevibe?style=flat"></a>
@@ -43,6 +44,8 @@ SafeVibe is a **local** toolkit for people who want to use AI-assisted coding (�
 It does **not** replace a proper security review, a classified-information process, or a human reading the model’s output. It sits on `127.0.0.1`: a reversible redaction proxy, a static pre-install scanner, an optional no-network sandbox, a switch to a local Ollama model, and a local audit log.
 
 All sample identifiers in this repository are **synthetic** (including a made-up CNP with a valid checksum, a demo CUI, and AWS’s official example access key). They do not belong to a real person, company or institution.
+
+**Live demo** (browser-only, synthetic sample data; not the self-hosted proxy): [safevibe-demo.vercel.app](https://safevibe-demo.vercel.app)
 
 - **Used for:** checking a prompt before it leaves the workstation; pointing Cursor / Continue / a script at a local OpenAI-compatible proxy; scanning a skill or package *before* `npm install`.
 - **Helps:** public-sector and other cautious IT teams who want a bilingual (English / Romanian) tool they can run themselves, with honest limits written on the box.
@@ -266,6 +269,8 @@ Issues and patches are welcome once the repository is public. Please do not open
 Nu înlocuiește un control de securitate, un procedeu pentru informații clasificate sau citirea de către un om a rezultatului. Rulează pe `127.0.0.1`.
 
 Toți identificatorii din exemple sunt **sintetici**. Nu aparțin unei persoane, unei firme sau unei instituții reale.
+
+**Demo live** (doar în browser, date sintetice de exemplu; nu este proxy-ul self-hosted): [safevibe-demo.vercel.app](https://safevibe-demo.vercel.app)
 
 #### Limite — citește mai întâi
 
