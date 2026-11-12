@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SafeVibe — local redaction &amp; scan</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="frame">
+    <aside class="rail">
+      <div class="brand">
+        <svg class="shield" viewBox="0 0 48 56" aria-hidden="true">
+          <path d="M24 2 L44 10 V26 C44 40 34 50 24 54 C14 50 4 40 4 26 V10 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M16 28 L22 34 L34 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/>
+        </svg>
+        <div>
+          <div class="name">SafeVibe</div>
+          <div class="tag">local only · 127.0.0.1</div>
+        </div>
+      </div>
+      <nav class="tabs" role="tablist">
+        <button type="button" class="tab is-on" data-tab="redact" role="tab" aria-selected="true">Redact</button>
+        <button type="button" class="tab" data-tab="scan" role="tab" aria-selected="false">Scan</button>
+        <button type="button" class="tab" data-tab="audit" role="tab" aria-selected="false">Audit</button>
+        <button type="button" class="tab" data-tab="settings" role="tab" aria-selected="false">Settings</button>
+      </nav>
+      <div class="lang">
+        <button type="button" id="lang-en" class="lang-btn is-on" data-lang="en">EN</button>
+        <button type="button" id="lang-ro" class="lang-btn" data-lang="ro">RO</button>
+      </div>
+      <p class="rail-note" data-i18n="railNote">Nothing in this UI is sent to a cloud model. Redaction and scanning run on this machine.</p>
+    </aside>
+
+    <div class="work">
+      <section class="limits" role="note">
+        <strong data-i18n="limitsTitle">Limits — read this first</strong>
+        <p data-i18n="limitsBody">Pseudonymization is not encryption. If you point the proxy at a cloud model, a transformed prompt still leaves the machine. SafeVibe is not for classified data or “secrete de serviciu”, is not a certification, and a green scan is not a guarantee of safety.</p>
+      </section>
+
+      <main id="main">
+        <section class="panel is-on" id="panel-redact" role="tabpanel">
+          <header class="panel-h">
+            <h1 data-i18n="redactTitle">Redaction preview</h1>
+            <p class="lead" data-i18n="redactLead">Paste a prompt. SafeVibe replaces secrets, addresses, Romanian CNP/CUI and dictionary terms with placeholders. The originals stay in a local vault and are not shown here.</p>
+          </header>
+          <div class="split">
+            <label class="block">
+              <span data-i18n="inputLabel">Input prompt</span>
+              <textarea id="prompt-in" rows="14" spellcheck="false"></textarea>
+            </label>
+            <label class="block">
+              <span data-i18n="outputLabel">Redacted output</span>
+              <textarea id="prompt-out" rows="14" readonly spellcheck="false"></textarea>
+            </label>
+          </div>
+          <div class="row">
+            <button type="button" class="btn" id="btn-sample" data-i18n="loadSample">Load demo prompt</button>
+            <button type="button" class="btn primary" id="btn-redact" data-i18n="runRedact">Redact locally</button>
+            <div id="redact-counts" class="chips" aria-live="polite"></div>
+          </div>
+        </section>
+
+        <section class="panel" id="panel-scan" role="tabpanel" hidden>
+          <header class="panel-h">
+            <h1 data-i18n="scanTitle">Static scanner</h1>
+            <p class="lead" data-i18n="scanLead">Point at a local folder, a skill, an MCP server, a VS Code extension or a package. SafeVibe only reads files. It never installs or runs the target.</p>
+          </header>
+          <div class="row">
+            <label class="grow">
+              <span data-i18n="scanTarget">Path or git URL</span>
+              <input type="text" id="scan-target" placeholder="examples/fixtures/risky-skill">
+            </label>
+            <button type="button" class="btn primary" id="btn-scan" data-i18n="runScan">Scan</button>
+          </div>
+          <div id="scan-verdict" class="verdict" hidden></div>
+          <pre id="scan-out" class="log" hidden></pre>
+        </section>
+
+        <section class="panel" id="panel-audit" role="tabpanel" hidden>
+          <header class="panel-h">
+            <h1 data-i18n="auditTitle">Audit log</h1>
+            <p class="lead" data-i18n="auditLead">Local JSONL only. Counts and destinations, never raw secrets, CNPs or full original prompts.</p>
+          </header>
+          <button type="button" class="btn" id="btn-audit" data-i18n="refreshAudit">Refresh</button>
+          <div class="table-wrap">
+            <table id="audit-table">
+              <thead>
+                <tr>
+                  <th data-i18n="colTime">Time</th>
+                  <th data-i18n="colEvent">Event</th>
+                  <th data-i18n="colDest">Destination</th>
+                  <th data-i18n="colDecision">Decision</th>
+                  <th data-i18n="colCounts">Counts</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel" id="panel-settings" role="tabpanel" hidden>
+          <header class="panel-h">
+            <h1 data-i18n="settingsTitle">Settings</h1>
+            <p class="lead" data-i18n="settingsLead">The default backend is Ollama on this machine. A cloud upstream is never chosen silently.</p>
+          </header>
+          <dl id="config-dl" class="meta"></dl>
+          <label class="block">
+            <span data-i18n="dictLabel">Organisation dictionary (YAML, stays in the browser session until you save it here)</span>
+            <textarea id="dict-yaml" rows="16" spellcheck="false"></textarea>
+          </label>
+          <button type="button" class="btn primary" id="btn-dict" data-i18n="saveDict">Save dictionary</button>
+          <p id="dict-status" class="status" aria-live="polite"></p>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>

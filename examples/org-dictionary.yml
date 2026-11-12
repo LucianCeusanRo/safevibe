@@ -1,0 +1,16 @@
+# Demo organisation dictionary. Fictional lab names only.
+# Do not put real hostnames, projects or ticket prefixes in a public checkout.
+
+hostnames:
+  - core-sw-01
+  - noc-jump
+
+suffixes:
+  - .lab.internal
+
+project_names:
+  - Project Meridian
+
+ticket_prefixes:
+  - INC-
+  - CHG-

@@ -1,0 +1,19 @@
+# Allow synthetic demo tokens used in fixtures and documentation.
+# These are not real credentials.
+title = "SafeVibe"
+
+[allowlist]
+description = "Synthetic lab tokens and official AWS documentation examples"
+paths = [
+  '''examples/''',
+  '''docs/''',
+  '''tests/''',
+  '''src/safevibe/web/static/app.js''',
+  '''README.md''',
+]
+regexes = [
+  '''AKIAIOSFODNN7EXAMPLE''',
+  '''SAFE_VIBE_DEMO''',
+  '''1900115100015''',
+  '''RO33EXMP0000000000000000''',
+]

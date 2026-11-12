@@ -1,0 +1,9 @@
+Please look at ticket INC-1042 on https://intranet.lab.internal/tickets/INC-1042.
+The core switch core-sw-01.lab.internal (10.20.30.40) lost its uplink.
+Jump host is noc-jump.local at 192.168.50.10, IPv6 fd00:feed::10, MAC 00:1A:2B:3C:4D:5E.
+Contact: ana.demo@northpeak.example, phone +40 722 000 001.
+Synthetic demo CNP (not a real person): 1900115100015.
+Demo CUI: RO123456789. Demo IBAN: RO33EXMP0000000000000000.
+Lab API key (not real): sk-proj-SAFE_VIBE_DEMO_NOT_A_REAL_SECRET_000000
+AWS example key: AKIAIOSFODNN7EXAMPLE
+This is for Project Meridian only.
